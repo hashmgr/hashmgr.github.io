@@ -1,121 +1,132 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Portfolio | Project Manager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, Tahoma, sans-serif;
-            margin: 0;
-            background: #f4f6f8;
-            color: #333;
-            direction: rtl;
-        }
-        header {
-            background: #1f2933;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
-        h2 {
-            color: #1f2933;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 10px;
-        }
-        .card {
-            background: #fff;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        ul {
-            padding-right: 20px;
-        }
-        footer {
-            background: #1f2933;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-        }
-        a {
-            color: #3b82f6;
-            text-decoration: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Hash | Project Manager</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg:#0f172a;
+  --card:#111827;
+  --text:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#38bdf8;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+h1{
+  font-size:48px;
+  margin:0 0 10px;
+}
+
+h2{
+  margin-top:60px;
+  color:var(--accent);
+  letter-spacing:1px;
+  font-size:14px;
+  text-transform:uppercase;
+}
+
+p{
+  color:var(--muted);
+  line-height:1.7;
+  max-width:600px;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  border-radius:12px;
+  margin-top:20px;
+}
+
+.skills span{
+  display:inline-block;
+  background:#1f2937;
+  padding:8px 14px;
+  border-radius:20px;
+  margin:6px 6px 0 0;
+  font-size:14px;
+}
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+}
+
+footer{
+  margin-top:80px;
+  color:var(--muted);
+  font-size:14px;
+}
+</style>
 </head>
+
 <body>
+<div class="container">
 
-<header>
-    <h1>Hash Manager</h1>
-    <p>Project Manager | Agile | Software & Business Projects</p>
-</header>
+  <h1>Hash</h1>
+  <p>
+    Project Manager focused on delivering tech projects,
+    leading teams, and turning ideas into shipped products.
+  </p>
 
-<section>
-    <h2>نبذة عني</h2>
-    <div class="card">
-        <p>
-            Project Manager بخبرة في إدارة المشاريع التقنية وغير التقنية،
-            تنظيم الفرق، متابعة الـ timelines، وضمان تسليم المشاريع بجودة عالية
-            وفي الوقت المحدد.
-        </p>
-    </div>
-</section>
+  <h2>What I Do</h2>
+  <div class="card">
+    <p>
+      Plan. Execute. Deliver.  
+      I manage timelines, risks, and people to ship projects on time.
+    </p>
+  </div>
 
-<section>
-    <h2>المهارات</h2>
-    <div class="card">
-        <ul>
-            <li>Project Planning & Scheduling</li>
-            <li>Agile & Scrum</li>
-            <li>Risk Management</li>
-            <li>Stakeholder Management</li>
-            <li>Team Leadership</li>
-            <li>Tools: Jira, Trello, Notion, MS Project</li>
-        </ul>
-    </div>
-</section>
+  <h2>Skills</h2>
+  <div class="skills">
+    <span>Project Management</span>
+    <span>Agile / Scrum</span>
+    <span>Roadmaps</span>
+    <span>Risk Management</span>
+    <span>Stakeholders</span>
+    <span>Jira</span>
+    <span>Notion</span>
+  </div>
 
-<section>
-    <h2>المشاريع</h2>
+  <h2>Selected Work</h2>
+  <div class="card">
+    <p><strong>Internal Management System</strong><br>
+    Led cross-functional team · Delivered −30% time reduction</p>
+  </div>
 
-    <div class="card">
-        <h3>مشروع إدارة نظام داخلي</h3>
-        <p>
-            قيادة فريق من 8 أفراد لتطوير نظام داخلي،
-            تقليل وقت التنفيذ بنسبة 30%.
-        </p>
-    </div>
+  <div class="card">
+    <p><strong>Mobile App Launch</strong><br>
+    End-to-end delivery using Scrum</p>
+  </div>
 
-    <div class="card">
-        <h3>تطبيق موبايل</h3>
-        <p>
-            إدارة دورة حياة التطبيق من الفكرة حتى الإطلاق
-            باستخدام Scrum.
-        </p>
-    </div>
+  <h2>Contact</h2>
+  <p>
+    <a href="#">LinkedIn</a> · 
+    <a href="#">Email</a> · 
+    <a href="https://hashmgr.github.io">GitHub</a>
+  </p>
 
-</section>
+  <footer>
+    © 2025 Hash
+  </footer>
 
-<section>
-    <h2>التواصل</h2>
-    <div class="card">
-        <p>Email: your@email.com</p>
-        <p>LinkedIn: <a href="#">linkedin.com/in/yourname</a></p>
-        <p>GitHub: <a href="https://hashmgr.github.io">hashmgr.github.io</a></p>
-    </div>
-</section>
-
-<footer>
-    <p>© 2025 Hash Manager</p>
-</footer>
-
+</div>
 </body>
 </html>
