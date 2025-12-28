@@ -2,108 +2,139 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hash | Falcon PM</title>
+<title>Hash | Legendary Falcon</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --dark:#020617;
   --night:#020617;
+  --deep:#020617;
+  --skyA:#0b1220;
+  --skyB:#020617;
   --gold:#facc15;
-  --sky1:#0f172a;
-  --sky2:#020617;
   --text:#e5e7eb;
   --muted:#94a3b8;
 }
 
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-
 body{
   font-family:Inter,Arial,sans-serif;
   color:var(--text);
-  background:var(--dark);
+  background:var(--night);
   overflow-x:hidden;
 }
 
-/* 🌌 MOVING SKY */
+/* ===== LEGENDARY SKY ===== */
 .sky{
   position:fixed;
   inset:0;
-  z-index:-1;
-  background:linear-gradient(120deg,var(--sky1),var(--sky2),var(--sky1));
-  background-size:300% 300%;
-  animation:skyMove 20s ease-in-out infinite;
+  z-index:-3;
+  background:linear-gradient(120deg,var(--skyA),var(--skyB),var(--skyA));
+  background-size:400% 400%;
+  animation:sky 25s ease infinite;
 }
-
-@keyframes skyMove{
+@keyframes sky{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-/* CONTAINER */
+/* CLOUD LAYERS */
+.clouds{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.04), transparent 40%),
+    radial-gradient(circle at 70% 40%, rgba(255,255,255,.03), transparent 45%),
+    radial-gradient(circle at 40% 70%, rgba(255,255,255,.025), transparent 50%);
+  animation:clouds 60s linear infinite;
+}
+@keyframes clouds{
+  from{transform:translateX(0)}
+  to{transform:translateX(-200px)}
+}
+
+/* HIGH ALTITUDE HAZE */
+.haze{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:radial-gradient(circle at top, rgba(250,204,21,.05), transparent 60%);
+}
+
+/* ===== CONTENT ===== */
 .container{
   max-width:900px;
   margin:auto;
-  padding:120px 20px;
+  padding:140px 20px;
 }
 
-/* HERO */
 .hero{
   border-left:3px solid var(--gold);
-  padding-left:30px;
+  padding-left:32px;
 }
 
 h1{
-  font-size:58px;
-  letter-spacing:2px;
+  font-size:64px;
+  letter-spacing:3px;
 }
 
 .tagline{
-  margin-top:12px;
+  margin-top:14px;
   font-size:18px;
   color:var(--muted);
-  max-width:620px;
+  max-width:640px;
 }
 
-/* SECTIONS */
+/* FALCON MOTION */
+.falcon-mark{
+  width:80px;
+  height:2px;
+  background:var(--gold);
+  margin-top:36px;
+  animation:glide 4s ease-in-out infinite;
+}
+@keyframes glide{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(26px)}
+  100%{transform:translateX(0)}
+}
+
 .section{
-  margin-top:100px;
+  margin-top:120px;
 }
 
 .section-title{
   font-size:12px;
-  letter-spacing:4px;
+  letter-spacing:5px;
   text-transform:uppercase;
   color:var(--gold);
-  margin-bottom:24px;
+  margin-bottom:26px;
 }
 
 .card{
-  border-top:1px solid rgba(250,204,21,0.2);
-  padding:24px 0;
+  border-top:1px solid rgba(250,204,21,.18);
+  padding:26px 0;
 }
 
 .card p{
   color:var(--muted);
   line-height:1.9;
-  max-width:720px;
+  max-width:740px;
+}
+
+.quote{
+  font-size:24px;
+  font-weight:300;
 }
 
 /* SKILLS */
 .skills span{
   display:inline-block;
-  margin:8px 18px 8px 0;
+  margin:8px 20px 8px 0;
   font-size:14px;
-  color:var(--text);
-}
-
-/* QUOTE */
-.quote{
-  font-size:22px;
-  font-weight:300;
-  line-height:1.7;
 }
 
 /* LINKS */
@@ -112,26 +143,10 @@ a{
   text-decoration:none;
 }
 
-/* FOOTER */
 footer{
-  margin-top:140px;
+  margin-top:160px;
   font-size:14px;
   color:var(--muted);
-}
-
-/* FALCON MOTION */
-.falcon-line{
-  width:60px;
-  height:2px;
-  background:var(--gold);
-  margin-top:30px;
-  animation:glide 3s ease-in-out infinite;
-}
-
-@keyframes glide{
-  0%{transform:translateX(0)}
-  50%{transform:translateX(20px)}
-  100%{transform:translateX(0)}
 }
 </style>
 </head>
@@ -139,6 +154,8 @@ footer{
 <body>
 
 <div class="sky"></div>
+<div class="clouds"></div>
+<div class="haze"></div>
 
 <div class="container">
 
@@ -146,67 +163,66 @@ footer{
   <div class="hero">
     <h1>HASH</h1>
     <p class="tagline">
-      A Project Manager who watches from above,
-      plans with precision,
-      and strikes only when the moment is right.
+      Legendary Falcon Project Manager.  
+      I observe from altitude, decide with clarity,
+      and strike only when success is inevitable.
     </p>
-    <div class="falcon-line"></div>
+    <div class="falcon-mark"></div>
   </div>
 
-  <!-- PHILOSOPHY -->
+  <!-- MINDSET -->
   <div class="section">
-    <div class="section-title">Falcon Mindset</div>
+    <div class="section-title">Falcon Code</div>
     <div class="card">
       <p class="quote">
-        High vision. Silent patience.  
-        Total control over the outcome.
+        Vision above noise.  
+        Patience above pressure.  
+        Control above chaos.
       </p>
     </div>
   </div>
 
   <!-- ROLE -->
   <div class="section">
-    <div class="section-title">What I Do</div>
+    <div class="section-title">Command</div>
     <div class="card">
       <p>
-        I lead teams through complexity,
-        manage risks calmly,
-        and deliver projects with absolute ownership.
+        I lead teams through uncertainty,
+        manage risk without panic,
+        and deliver outcomes with total ownership.
       </p>
     </div>
   </div>
 
   <!-- SKILLS -->
   <div class="section">
-    <div class="section-title">Core Skills</div>
+    <div class="section-title">Capabilities</div>
     <div class="card skills">
       <span>Project Leadership</span>
       <span>Agile / Scrum</span>
-      <span>Strategic Vision</span>
-      <span>Risk Control</span>
-      <span>Stakeholder Alignment</span>
+      <span>Strategic Planning</span>
+      <span>Risk Governance</span>
+      <span>Stakeholder Control</span>
       <span>Jira · Notion</span>
     </div>
   </div>
 
   <!-- MISSIONS -->
   <div class="section">
-    <div class="section-title">Selected Missions</div>
-
+    <div class="section-title">Missions</div>
     <div class="card">
-      <p><strong>Enterprise System</strong><br>
-      Reduced delivery time by 30% through focused execution.</p>
+      <p><strong>Enterprise Platform</strong><br>
+      −30% delivery time through precision execution.</p>
     </div>
-
     <div class="card">
-      <p><strong>Mobile Product Launch</strong><br>
-      Led end-to-end delivery using Scrum.</p>
+      <p><strong>Mobile Product</strong><br>
+      Full lifecycle command using Scrum.</p>
     </div>
   </div>
 
   <!-- CONTACT -->
   <div class="section">
-    <div class="section-title">Contact</div>
+    <div class="section-title">Signal</div>
     <div class="card">
       <p>
         <a href="#">LinkedIn</a> ·
@@ -217,10 +233,9 @@ footer{
   </div>
 
   <footer>
-    © 2025 Hash — Fly Higher.
+    © 2025 Hash — Legendary Falcon.
   </footer>
 
 </div>
-
 </body>
 </html>
