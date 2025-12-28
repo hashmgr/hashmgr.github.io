@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hash | Project Manager</title>
+<title>Hash | Falcon Project Manager</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --bg:#0f172a;
-  --card:#111827;
+  --bg:#020617;
+  --card:#020617;
+  --line:#1e293b;
   --text:#e5e7eb;
-  --muted:#9ca3af;
-  --accent:#38bdf8;
+  --muted:#94a3b8;
+  --accent:#facc15; /* Falcon Gold */
 }
 
 *{box-sizing:border-box}
@@ -26,42 +27,62 @@ body{
 .container{
   max-width:900px;
   margin:auto;
-  padding:80px 20px;
+  padding:100px 20px;
+}
+
+.hero{
+  border-left:3px solid var(--accent);
+  padding-left:30px;
 }
 
 h1{
-  font-size:48px;
-  margin:0 0 10px;
-}
-
-h2{
-  margin-top:60px;
-  color:var(--accent);
+  font-size:56px;
+  margin:0;
   letter-spacing:1px;
-  font-size:14px;
-  text-transform:uppercase;
 }
 
-p{
+.tagline{
+  margin-top:10px;
   color:var(--muted);
-  line-height:1.7;
+  font-size:18px;
   max-width:600px;
 }
 
+.section{
+  margin-top:90px;
+}
+
+.section-title{
+  font-size:13px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:20px;
+}
+
 .card{
-  background:var(--card);
-  padding:20px;
-  border-radius:12px;
-  margin-top:20px;
+  border-top:1px solid var(--line);
+  padding:20px 0;
+}
+
+.card p{
+  color:var(--muted);
+  max-width:700px;
+  line-height:1.8;
 }
 
 .skills span{
   display:inline-block;
-  background:#1f2937;
-  padding:8px 14px;
-  border-radius:20px;
-  margin:6px 6px 0 0;
+  margin:6px 14px 6px 0;
+  color:var(--text);
   font-size:14px;
+}
+
+.quote{
+  font-size:22px;
+  font-weight:300;
+  max-width:700px;
+  line-height:1.6;
 }
 
 a{
@@ -70,7 +91,7 @@ a{
 }
 
 footer{
-  margin-top:80px;
+  margin-top:120px;
   color:var(--muted);
   font-size:14px;
 }
@@ -80,51 +101,84 @@ footer{
 <body>
 <div class="container">
 
-  <h1>Hash</h1>
-  <p>
-    Project Manager focused on delivering tech projects,
-    leading teams, and turning ideas into shipped products.
-  </p>
-
-  <h2>What I Do</h2>
-  <div class="card">
-    <p>
-      Plan. Execute. Deliver.  
-      I manage timelines, risks, and people to ship projects on time.
+  <!-- HERO -->
+  <div class="hero">
+    <h1>HASH</h1>
+    <p class="tagline">
+      Project Manager who observes quietly,
+      plans precisely, and strikes at the right moment.
     </p>
   </div>
 
-  <h2>Skills</h2>
-  <div class="skills">
-    <span>Project Management</span>
-    <span>Agile / Scrum</span>
-    <span>Roadmaps</span>
-    <span>Risk Management</span>
-    <span>Stakeholders</span>
-    <span>Jira</span>
-    <span>Notion</span>
+  <!-- PHILOSOPHY -->
+  <div class="section">
+    <div class="section-title">Philosophy</div>
+    <div class="card">
+      <p class="quote">
+        Like a falcon, I stay above the chaos,
+        track every movement,
+        and commit only when success is guaranteed.
+      </p>
+    </div>
   </div>
 
-  <h2>Selected Work</h2>
-  <div class="card">
-    <p><strong>Internal Management System</strong><br>
-    Led cross-functional team · Delivered −30% time reduction</p>
+  <!-- WHAT I DO -->
+  <div class="section">
+    <div class="section-title">What I Do</div>
+    <div class="card">
+      <p>
+        I lead teams, manage risks, and deliver projects
+        with discipline, clarity, and full ownership.
+      </p>
+    </div>
   </div>
 
-  <div class="card">
-    <p><strong>Mobile App Launch</strong><br>
-    End-to-end delivery using Scrum</p>
+  <!-- SKILLS -->
+  <div class="section">
+    <div class="section-title">Core Skills</div>
+    <div class="card skills">
+      <span>Project Leadership</span>
+      <span>Agile / Scrum</span>
+      <span>Strategic Planning</span>
+      <span>Risk Control</span>
+      <span>Stakeholder Alignment</span>
+      <span>Jira · Notion</span>
+    </div>
   </div>
 
-  <h2>Contact</h2>
-  <p>
-    <a href="#">LinkedIn</a> · 
-    <a href="#">Email</a> · 
-    <a href="https://hashmgr.github.io">GitHub</a>
-  </p>
+  <!-- EXPERIENCE -->
+  <div class="section">
+    <div class="section-title">Selected Missions</div>
+
+    <div class="card">
+      <p>
+        <strong>Enterprise Internal System</strong><br>
+        Reduced delivery time by 30% through focused execution.
+      </p>
+    </div>
+
+    <div class="card">
+      <p>
+        <strong>Mobile Product Launch</strong><br>
+        Full lifecycle ownership using Scrum.
+      </p>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section">
+    <div class="section-title">Contact</div>
+    <div class="card">
+      <p>
+        <a href="#">LinkedIn</a> ·
+        <a href="#">Email</a> ·
+        <a href="https://hashmgr.github.io">GitHub</a>
+      </p>
+    </div>
+  </div>
 
   <footer>
-    © 2025 Hash
+    © 2025 Hash — Stay Sharp.
   </footer>
 
 </div>
