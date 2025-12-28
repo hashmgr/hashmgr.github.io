@@ -2,133 +2,176 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hash | Falcon Project Manager</title>
+<title>Hash | Falcon PM</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --bg:#020617;
-  --card:#020617;
-  --line:#1e293b;
+  --dark:#020617;
+  --night:#020617;
+  --gold:#facc15;
+  --sky1:#0f172a;
+  --sky2:#020617;
   --text:#e5e7eb;
   --muted:#94a3b8;
-  --accent:#facc15; /* Falcon Gold */
 }
 
-*{box-sizing:border-box}
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  margin:0;
   font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
   color:var(--text);
+  background:var(--dark);
+  overflow-x:hidden;
 }
 
+/* 🌌 MOVING SKY */
+.sky{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:linear-gradient(120deg,var(--sky1),var(--sky2),var(--sky1));
+  background-size:300% 300%;
+  animation:skyMove 20s ease-in-out infinite;
+}
+
+@keyframes skyMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* CONTAINER */
 .container{
   max-width:900px;
   margin:auto;
-  padding:100px 20px;
+  padding:120px 20px;
 }
 
+/* HERO */
 .hero{
-  border-left:3px solid var(--accent);
+  border-left:3px solid var(--gold);
   padding-left:30px;
 }
 
 h1{
-  font-size:56px;
-  margin:0;
-  letter-spacing:1px;
+  font-size:58px;
+  letter-spacing:2px;
 }
 
 .tagline{
-  margin-top:10px;
-  color:var(--muted);
+  margin-top:12px;
   font-size:18px;
-  max-width:600px;
+  color:var(--muted);
+  max-width:620px;
 }
 
+/* SECTIONS */
 .section{
-  margin-top:90px;
+  margin-top:100px;
 }
 
 .section-title{
-  font-size:13px;
-  letter-spacing:3px;
+  font-size:12px;
+  letter-spacing:4px;
   text-transform:uppercase;
-  color:var(--accent);
-  margin-bottom:20px;
+  color:var(--gold);
+  margin-bottom:24px;
 }
 
 .card{
-  border-top:1px solid var(--line);
-  padding:20px 0;
+  border-top:1px solid rgba(250,204,21,0.2);
+  padding:24px 0;
 }
 
 .card p{
   color:var(--muted);
-  max-width:700px;
-  line-height:1.8;
+  line-height:1.9;
+  max-width:720px;
 }
 
+/* SKILLS */
 .skills span{
   display:inline-block;
-  margin:6px 14px 6px 0;
-  color:var(--text);
+  margin:8px 18px 8px 0;
   font-size:14px;
+  color:var(--text);
 }
 
+/* QUOTE */
 .quote{
   font-size:22px;
   font-weight:300;
-  max-width:700px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
+/* LINKS */
 a{
-  color:var(--accent);
+  color:var(--gold);
   text-decoration:none;
 }
 
+/* FOOTER */
 footer{
-  margin-top:120px;
-  color:var(--muted);
+  margin-top:140px;
   font-size:14px;
+  color:var(--muted);
+}
+
+/* FALCON MOTION */
+.falcon-line{
+  width:60px;
+  height:2px;
+  background:var(--gold);
+  margin-top:30px;
+  animation:glide 3s ease-in-out infinite;
+}
+
+@keyframes glide{
+  0%{transform:translateX(0)}
+  50%{transform:translateX(20px)}
+  100%{transform:translateX(0)}
 }
 </style>
 </head>
 
 <body>
+
+<div class="sky"></div>
+
 <div class="container">
 
   <!-- HERO -->
   <div class="hero">
     <h1>HASH</h1>
     <p class="tagline">
-      Project Manager who observes quietly,
-      plans precisely, and strikes at the right moment.
+      A Project Manager who watches from above,
+      plans with precision,
+      and strikes only when the moment is right.
     </p>
+    <div class="falcon-line"></div>
   </div>
 
   <!-- PHILOSOPHY -->
   <div class="section">
-    <div class="section-title">Philosophy</div>
+    <div class="section-title">Falcon Mindset</div>
     <div class="card">
       <p class="quote">
-        Like a falcon, I stay above the chaos,
-        track every movement,
-        and commit only when success is guaranteed.
+        High vision. Silent patience.  
+        Total control over the outcome.
       </p>
     </div>
   </div>
 
-  <!-- WHAT I DO -->
+  <!-- ROLE -->
   <div class="section">
     <div class="section-title">What I Do</div>
     <div class="card">
       <p>
-        I lead teams, manage risks, and deliver projects
-        with discipline, clarity, and full ownership.
+        I lead teams through complexity,
+        manage risks calmly,
+        and deliver projects with absolute ownership.
       </p>
     </div>
   </div>
@@ -139,29 +182,25 @@ footer{
     <div class="card skills">
       <span>Project Leadership</span>
       <span>Agile / Scrum</span>
-      <span>Strategic Planning</span>
+      <span>Strategic Vision</span>
       <span>Risk Control</span>
       <span>Stakeholder Alignment</span>
       <span>Jira · Notion</span>
     </div>
   </div>
 
-  <!-- EXPERIENCE -->
+  <!-- MISSIONS -->
   <div class="section">
     <div class="section-title">Selected Missions</div>
 
     <div class="card">
-      <p>
-        <strong>Enterprise Internal System</strong><br>
-        Reduced delivery time by 30% through focused execution.
-      </p>
+      <p><strong>Enterprise System</strong><br>
+      Reduced delivery time by 30% through focused execution.</p>
     </div>
 
     <div class="card">
-      <p>
-        <strong>Mobile Product Launch</strong><br>
-        Full lifecycle ownership using Scrum.
-      </p>
+      <p><strong>Mobile Product Launch</strong><br>
+      Led end-to-end delivery using Scrum.</p>
     </div>
   </div>
 
@@ -178,9 +217,10 @@ footer{
   </div>
 
   <footer>
-    © 2025 Hash — Stay Sharp.
+    © 2025 Hash — Fly Higher.
   </footer>
 
 </div>
+
 </body>
 </html>
