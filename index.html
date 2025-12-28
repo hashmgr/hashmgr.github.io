@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hash | Ultra Legendary Falcon</title>
+<title>Hash | Legendary Falcon</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -22,14 +22,13 @@ body{
   background:var(--night);
   color:var(--text);
   overflow-x:hidden;
-  cursor:crosshair;
 }
 
-/* 🌌 SKY */
+/* ===== SKY ===== */
 .sky{
   position:fixed;
   inset:0;
-  z-index:-3;
+  z-index:-4;
   background:linear-gradient(120deg,var(--sky1),var(--sky2),var(--sky1));
   background-size:400% 400%;
   animation:skyMove 30s ease infinite;
@@ -40,38 +39,39 @@ body{
   100%{background-position:0% 50%}
 }
 
-/* ☁️ CLOUDS */
-.clouds{
+/* ===== SVG CLOUDS ===== */
+.cloud-layer{
   position:fixed;
-  inset:0;
-  z-index:-2;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,.04), transparent 40%),
-    radial-gradient(circle at 70% 40%, rgba(255,255,255,.03), transparent 45%),
-    radial-gradient(circle at 40% 70%, rgba(255,255,255,.025), transparent 50%);
-  animation:cloudMove 80s linear infinite;
+  top:0;
+  left:0;
+  width:200%;
+  z-index:-3;
+  opacity:.6;
+  animation:cloudDrift 120s linear infinite;
 }
-@keyframes cloudMove{
+@keyframes cloudDrift{
   from{transform:translateX(0)}
-  to{transform:translateX(-300px)}
+  to{transform:translateX(-50%)}
 }
 
-/* ✨ GOLDEN AURA */
+/* ===== GOLD HAZE ===== */
 .glow{
   position:fixed;
   inset:0;
-  z-index:-1;
-  background:radial-gradient(circle at center, rgba(250,204,21,.08), transparent 65%);
+  z-index:-2;
+  background:radial-gradient(circle at top, rgba(250,204,21,.08), transparent 60%);
 }
 
-/* CONTENT */
+/* ===== CONTENT ===== */
 .container{
   max-width:900px;
   margin:auto;
-  padding:160px 20px;
+  padding:140px 20px;
 }
 
+/* HERO */
 .hero{
+  position:relative;
   border-left:3px solid var(--gold);
   padding-left:36px;
 }
@@ -88,13 +88,17 @@ h1{
   max-width:650px;
 }
 
-/* FALCON STRIKE LINE */
-.strike{
-  width:90px;
-  height:2px;
-  background:var(--gold);
+/* ===== FALCON SVG ===== */
+.falcon{
+  width:220px;
   margin-top:40px;
-  transition:transform .6s ease;
+  filter:drop-shadow(0 0 14px rgba(250,204,21,.6));
+  animation:falconGlide 5s ease-in-out infinite;
+}
+@keyframes falconGlide{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-14px)}
+  100%{transform:translateY(0)}
 }
 
 /* SECTIONS */
@@ -104,7 +108,6 @@ h1{
   transform:translateY(40px);
   transition:all 1s ease;
 }
-
 .section.visible{
   opacity:1;
   transform:translateY(0);
@@ -154,8 +157,24 @@ footer{
 
 <body>
 
+<!-- SKY -->
 <div class="sky"></div>
-<div class="clouds"></div>
+
+<!-- SVG CLOUDS -->
+<div class="cloud-layer">
+<svg viewBox="0 0 1600 200" xmlns="http://www.w3.org/2000/svg">
+  <g fill="rgba(255,255,255,0.08)">
+    <ellipse cx="200" cy="120" rx="160" ry="40"/>
+    <ellipse cx="340" cy="100" rx="120" ry="35"/>
+    <ellipse cx="520" cy="120" rx="180" ry="45"/>
+
+    <ellipse cx="900" cy="90" rx="150" ry="38"/>
+    <ellipse cx="1080" cy="110" rx="200" ry="45"/>
+    <ellipse cx="1300" cy="95" rx="140" ry="34"/>
+  </g>
+</svg>
+</div>
+
 <div class="glow"></div>
 
 <div class="container">
@@ -164,11 +183,29 @@ footer{
   <div class="hero">
     <h1>HASH</h1>
     <p class="tagline">
-      Ultra Legendary Falcon Project Manager.  
-      I operate above noise, move with intent,
-      and strike only when victory is certain.
+      Legendary Falcon Project Manager.  
+      I observe from above, decide with clarity,
+      and strike only when victory is inevitable.
     </p>
-    <div class="strike" id="strike"></div>
+
+    <!-- FALCON SVG -->
+    <svg class="falcon" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="
+        M20 120
+        Q140 40 300 80
+        Q460 40 580 120
+        L540 110
+        Q420 80 300 100
+        Q180 80 60 110
+        Z"
+        fill="#facc15"/>
+      <path d="
+        M290 95
+        Q300 80 320 90
+        Q305 95 300 105
+        Z"
+        fill="#facc15"/>
+    </svg>
   </div>
 
   <!-- MINDSET -->
@@ -190,12 +227,12 @@ footer{
       <p>
         I lead teams through uncertainty,
         control risk without emotion,
-        and deliver results without excuses.
+        and deliver results with full ownership.
       </p>
     </div>
   </div>
 
-  <!-- CAPABILITIES -->
+  <!-- SKILLS -->
   <div class="section">
     <div class="section-title">Capabilities</div>
     <div class="card skills">
@@ -204,43 +241,24 @@ footer{
       <span>Strategic Vision</span>
       <span>Risk Control</span>
       <span>Stakeholder Authority</span>
-      <span>Jira · Notion</span>
-    </div>
-  </div>
-
-  <!-- SIGNAL -->
-  <div class="section">
-    <div class="section-title">Signal</div>
-    <div class="card">
-      <p>
-        <a href="#">LinkedIn</a> ·
-        <a href="#">Email</a> ·
-        <a href="https://hashmgr.github.io">GitHub</a>
-      </p>
     </div>
   </div>
 
   <footer>
-    © 2025 Hash — Apex Predator.
+    © 2025 Hash — Apex Falcon.
   </footer>
 
 </div>
 
 <script>
-/* 🦅 SCROLL STRIKE EFFECT */
-const sections = document.querySelectorAll('.section');
-const strike = document.getElementById('strike');
-
-window.addEventListener('scroll', () => {
-  const trigger = window.innerHeight * 0.85;
-
-  sections.forEach(sec => {
-    if(sec.getBoundingClientRect().top < trigger){
-      sec.classList.add('visible');
+const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+  const t=window.innerHeight*0.85;
+  sections.forEach(s=>{
+    if(s.getBoundingClientRect().top<t){
+      s.classList.add('visible');
     }
   });
-
-  strike.style.transform = `translateX(${window.scrollY / 10}px)`;
 });
 </script>
 
