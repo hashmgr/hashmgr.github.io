@@ -1,266 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Hash | Legendary Falcon</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M. HASHEM | إدارة مشاريع ذكية</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-<style>
-:root{
-  --night:#020617;
-  --sky1:#0b1220;
-  --sky2:#020617;
-  --gold:#facc15;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-}
+    <style>
+        :root {
+            --bg: #030303;
+            --accent: #d4af37;
+            --card-bg: #0d0d0d;
+            --border: rgba(212, 175, 55, 0.1);
+            --text-sub: #999;
+        }
 
-*{margin:0;padding:0;box-sizing:border-box}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: var(--bg); color: #fff; 
+            font-family: 'Alexandria', sans-serif; 
+            overflow-x: hidden;
+        }
 
-body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--night);
-  color:var(--text);
-  overflow-x:hidden;
-}
+        /* --- خلفية متحركة ناعمة --- */
+        #glow {
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            z-index: -1; filter: blur(80px); pointer-events: none;
+        }
 
-/* ===== SKY ===== */
-.sky{
-  position:fixed;
-  inset:0;
-  z-index:-4;
-  background:linear-gradient(120deg,var(--sky1),var(--sky2),var(--sky1));
-  background-size:400% 400%;
-  animation:skyMove 30s ease infinite;
-}
-@keyframes skyMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
+        section { padding: 100px 8%; display: flex; align-items: center; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; }
+        .reveal { opacity: 0; transform: translateY(30px); }
 
-/* ===== SVG CLOUDS ===== */
-.cloud-layer{
-  position:fixed;
-  top:0;
-  left:0;
-  width:200%;
-  z-index:-3;
-  opacity:.6;
-  animation:cloudDrift 120s linear infinite;
-}
-@keyframes cloudDrift{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+        h1 { font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; }
+        h2 { color: var(--accent); font-size: 2rem; margin-bottom: 20px; }
 
-/* ===== GOLD HAZE ===== */
-.glow{
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  background:radial-gradient(circle at top, rgba(250,204,21,.08), transparent 60%);
-}
+        /* --- Bento Grid --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
+        .bento-card { 
+            grid-column: span 4; background: var(--card-bg); border: 1px solid var(--border);
+            padding: 40px; border-radius: 24px; transition: 0.4s;
+        }
+        .bento-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .span-8 { grid-column: span 8; }
+        .span-12 { grid-column: span 12; }
 
-/* ===== CONTENT ===== */
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:140px 20px;
-}
+        .tag { color: var(--accent); font-size: 0.8rem; letter-spacing: 2px; display: block; margin-bottom: 10px; font-weight: 300; }
+        p { color: var(--text-sub); font-size: 1.1rem; line-height: 1.6; }
 
-/* HERO */
-.hero{
-  position:relative;
-  border-left:3px solid var(--gold);
-  padding-left:36px;
-}
+        .btn { 
+            display: inline-block; padding: 18px 40px; background: var(--accent); color: #000; 
+            border-radius: 50px; text-decoration: none; font-weight: 700; margin-top: 30px;
+        }
 
-h1{
-  font-size:72px;
-  letter-spacing:4px;
-}
-
-.tagline{
-  margin-top:16px;
-  font-size:18px;
-  color:var(--muted);
-  max-width:650px;
-}
-
-/* ===== FALCON SVG ===== */
-.falcon{
-  width:220px;
-  margin-top:40px;
-  filter:drop-shadow(0 0 14px rgba(250,204,21,.6));
-  animation:falconGlide 5s ease-in-out infinite;
-}
-@keyframes falconGlide{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-14px)}
-  100%{transform:translateY(0)}
-}
-
-/* SECTIONS */
-.section{
-  margin-top:160px;
-  opacity:0;
-  transform:translateY(40px);
-  transition:all 1s ease;
-}
-.section.visible{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.section-title{
-  font-size:12px;
-  letter-spacing:6px;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:28px;
-}
-
-.card{
-  border-top:1px solid rgba(250,204,21,.2);
-  padding:28px 0;
-}
-
-.card p{
-  color:var(--muted);
-  line-height:2;
-  max-width:760px;
-}
-
-.quote{
-  font-size:26px;
-  font-weight:300;
-}
-
-/* SKILLS */
-.skills span{
-  display:inline-block;
-  margin:10px 22px 10px 0;
-  font-size:14px;
-}
-
-/* LINKS */
-a{color:var(--gold);text-decoration:none}
-
-footer{
-  margin-top:200px;
-  font-size:14px;
-  color:var(--muted);
-}
-</style>
+        @media (max-width: 992px) { .bento-card { grid-column: span 12; } }
+    </style>
 </head>
-
 <body>
 
-<!-- SKY -->
-<div class="sky"></div>
+    <div id="glow"></div>
 
-<!-- SVG CLOUDS -->
-<div class="cloud-layer">
-<svg viewBox="0 0 1600 200" xmlns="http://www.w3.org/2000/svg">
-  <g fill="rgba(255,255,255,0.08)">
-    <ellipse cx="200" cy="120" rx="160" ry="40"/>
-    <ellipse cx="340" cy="100" rx="120" ry="35"/>
-    <ellipse cx="520" cy="120" rx="180" ry="45"/>
+    <section>
+        <div class="container reveal">
+            <span class="tag">M. HASHEM | الإدارة الذكية</span>
+            <h1>مشروعك محتاج<br><span style="color: var(--accent);">سيستم مش مجرد مدير.</span></h1>
+            <p style="max-width: 650px;">محمد هاشم.. بنقل مشروعك من "الورقة والقلم" والعشوائية، لنظام رقمي ذكي بيراقب كل كبيرة وصغيرة عشان تضمن مكسبك وتوفر وقتك.</p>
+            <a href="#contact" class="btn">احجز استشارتك مجاناً</a>
+        </div>
+    </section>
 
-    <ellipse cx="900" cy="90" rx="150" ry="38"/>
-    <ellipse cx="1080" cy="110" rx="200" ry="45"/>
-    <ellipse cx="1300" cy="95" rx="140" ry="34"/>
-  </g>
-</svg>
-</div>
+    <section>
+        <div class="container bento-grid">
+            <div class="bento-card span-8 reveal">
+                <span class="tag">الرحلة</span>
+                <h2>بدأت من "الكود" لحد "الإدارة"</h2>
+                <p>أنا في الأصل مبرمج (Backend & Frontend)، يعني فاهم إزاي الأنظمة بتتبني من الصفر. النهاردة بستخدم الخبرة دي في **إدارة المشاريع**؛ عشان أضمن لك إن التكنولوجيا تخدم البيزنس بتاعك صح مش مجرد شكل.</p>
+            </div>
+            
+            <div class="bento-card reveal" style="background: var(--accent); color: #000;">
+                <span class="tag" style="color: #000;">الأدوات</span>
+                <h2 style="color: #000;">أسلحتي</h2>
+                <p style="color: #000; font-weight: 600;">
+                    • Primavera P6<br>
+                    • Power BI<br>
+                    • SQL Data<br>
+                    • Node.js & React
+                </p>
+            </div>
 
-<div class="glow"></div>
+            <div class="bento-card span-4 reveal">
+                <h2>ليه أنا؟</h2>
+                <p>لأني فاهم لغة المبرمجين ولغة أصحاب المشاريع. هكون "المترجم" اللي بيضمن إن السيستم شغال لمصلحتك.</p>
+            </div>
 
-<div class="container">
+            <div class="bento-card span-8 reveal">
+                <h2>إيه اللي هقدمهولك؟</h2>
+                <p>تقارير لحظية لمشروعك، مراقبة دقيقة للميزانية، وحماية جدولك الزمني من أي تأخير مفاجئ.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- HERO -->
-  <div class="hero">
-    <h1>HASH</h1>
-    <p class="tagline">
-      Legendary Falcon Project Manager.  
-      I observe from above, decide with clarity,
-      and strike only when victory is inevitable.
-    </p>
+    <section>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 50px;">مشاريع غيرت الواقع</h2>
+            <div class="bento-grid">
+                <div class="bento-card span-6 reveal">
+                    <h3>أتمتة الشركات</h3>
+                    <p>حولت إدارة يدوية بالكامل لنظام رقمي بيوفر 20% من المصاريف الضايعة.</p>
+                </div>
+                <div class="bento-card span-6 reveal">
+                    <h3>داشبورد اتخاذ القرار</h3>
+                    <p>بنيت لوحة تحكم تخلي صاحب المشروع يشوف أداء شغله لحظة بلحظة من موبايله.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- FALCON SVG -->
-    <svg class="falcon" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
-      <path d="
-        M20 120
-        Q140 40 300 80
-        Q460 40 580 120
-        L540 110
-        Q420 80 300 100
-        Q180 80 60 110
-        Z"
-        fill="#facc15"/>
-      <path d="
-        M290 95
-        Q300 80 320 90
-        Q305 95 300 105
-        Z"
-        fill="#facc15"/>
-    </svg>
-  </div>
+    <section>
+        <div class="container bento-grid">
+            <div class="bento-card span-12 reveal" style="text-align: center;">
+                <h2>مفيش مجال للصدفة</h2>
+                <p style="max-width: 800px; margin: 0 auto;">حقك كصاحب مشروع تعرف الحقيقة. بنقدم لك بيانات واضحة وصادقة بتعرفك المشروع رايح فين بالظبط، عشان تاخد قرارك وأنت مطمن.</p>
+            </div>
+        </div>
+    </section>
 
-  <!-- MINDSET -->
-  <div class="section">
-    <div class="section-title">Falcon Doctrine</div>
-    <div class="card">
-      <p class="quote">
-        Silence is strategy.  
-        Altitude is advantage.  
-        Timing is everything.
-      </p>
-    </div>
-  </div>
+    <section id="contact" style="text-align: center;">
+        <div class="container reveal">
+            <h2 style="font-size: 3rem;">جاهز نكبر مشروعك؟</h2>
+            <p>لو بتدور على إدارة احترافية تريح بالك، تواصل معايا دلوقتي.</p>
+            <a href="mailto:h@hashmger.com" class="btn">ارسل رسالة الآن</a>
+        </div>
+    </section>
 
-  <!-- COMMAND -->
-  <div class="section">
-    <div class="section-title">Command</div>
-    <div class="card">
-      <p>
-        I lead teams through uncertainty,
-        control risk without emotion,
-        and deliver results with full ownership.
-      </p>
-    </div>
-  </div>
+    <script>
+        // إضاءة تتبع الماوس
+        const glow = document.getElementById('glow');
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(glow, { x: e.clientX - 300, y: e.clientY - 300, duration: 1.5 });
+        });
 
-  <!-- SKILLS -->
-  <div class="section">
-    <div class="section-title">Capabilities</div>
-    <div class="card skills">
-      <span>Project Leadership</span>
-      <span>Agile / Scrum</span>
-      <span>Strategic Vision</span>
-      <span>Risk Control</span>
-      <span>Stakeholder Authority</span>
-    </div>
-  </div>
-
-  <footer>
-    © 2025 Hash — Apex Falcon.
-  </footer>
-
-</div>
-
-<script>
-const sections=document.querySelectorAll('.section');
-window.addEventListener('scroll',()=>{
-  const t=window.innerHeight*0.85;
-  sections.forEach(s=>{
-    if(s.getBoundingClientRect().top<t){
-      s.classList.add('visible');
-    }
-  });
-});
-</script>
-
+        // أنيميشن الظهور
+        gsap.registerPlugin(ScrollTrigger);
+        document.querySelectorAll('.reveal').forEach(el => {
+            gsap.to(el, { opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: el, start: "top 90%" } });
+        });
+    </script>
 </body>
 </html>
