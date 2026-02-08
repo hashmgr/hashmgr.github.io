@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Carooo | Yellow Edition</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:wght@700&family=Cairo:wght@900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+    <style>
+        :root {
+            /* --- THEME: TRENDY YELLOW --- */
+            --app-bg: #f8fafc;
+            --header-bg: #ffffff;
+            --dock-height: 45vh;
+            
+            /* Yellow Brand Colors */
+            --accent: #FFD600; /* الأصفر العصري */
+            --accent-dark: #F59E0B;
+            --accent-grad: linear-gradient(135deg, #FFD600 0%, #FFB300 100%);
+            
+            --text-main: #0f172a;
+            --text-on-accent: #000000; /* نص أسود للتباين مع الأصفر */
+            
+            --border: #e2e8f0;
+            --safe-bottom: env(safe-area-inset-bottom, 20px);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--app-bg);
+            font-family: 'Tajawal', sans-serif;
+            height: 100dvh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-main);
+        }
+
+        /* --- 1. HEADER --- */
+        .app-header {
+            height: 60px;
+            background: var(--header-bg);
+            padding: 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 50;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        
+        .logo { 
+            font-weight: 900; 
+            font-size: 1.5rem; 
+            letter-spacing: -1px;
+            color: #000;
+            position: relative;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .logo::after {
+            content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block;
+        }
+
+        /* --- 2. WORKSPACE --- */
+        .workspace {
+            flex-grow: 1;
+            position: relative;
+            background: #f1f5f9;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .scaler-wrap {
+            transform-origin: center center;
+            transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        /* --- 3. SLIDE --- */
+        .slide {
+            width: 1080px; height: 1350px; background: #fff; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+        }
+        
+        .s-bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+        .s-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); z-index: 1; display: none; }
+        .s-content { position: relative; z-index: 2; flex: 1; padding: 80px; display: flex; flex-direction: column; }
+        
+        .s-icon-box { margin-bottom: 40px; }
+        .s-icon-box svg { width: 120px; height: 120px; stroke-width: 1.5; }
+        
+        .s-title { font-family: 'Amiri', serif; font-weight: 700; font-size: 7rem; line-height: 1.1; margin-bottom: 30px; word-wrap: break-word; }
+        .s-desc { font-size: 2.8rem; line-height: 1.5; font-weight: 500; opacity: 0.9; white-space: pre-wrap; }
+        .s-footer { margin-top: auto; padding-top: 40px; border-top: 4px solid currentColor; display: flex; justify-content: space-between; font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
+
+        /* --- TEMPLATES Styles --- */
+        .t-center .s-content { text-align: center; align-items: center; justify-content: center; }
+        .t-left .s-content { text-align: left; align-items: flex-start; justify-content: center; }
+        .t-right .s-content { text-align: right; align-items: flex-end; justify-content: center; }
+        .t-top .s-content { justify-content: flex-start; text-align: center; padding-top: 150px; }
+        .t-bottom .s-content { justify-content: flex-end; text-align: center; padding-bottom: 150px; }
+        .t-bold .s-title { font-family: 'Cairo', sans-serif; font-size: 10rem; line-height: 1; font-weight: 900; }
+        .t-frame .s-content { border: 20px solid currentColor; margin: 40px; height: auto; flex: 1; border-radius: 40px; }
+        .t-quote .s-title { font-style: italic; font-size: 5rem; line-height: 1.4; } .t-quote .s-icon-box { opacity: 0.5; }
+        .t-list .s-content { align-items: flex-start; text-align: right; } .t-list .s-title { font-size: 4rem; border-bottom: 10px solid currentColor; padding-bottom: 20px; width: 100%; }
+        .t-minimal .s-title { font-weight: 300; letter-spacing: -3px; font-size: 6rem; } .t-minimal .s-icon-box { display: none; }
+        .t-split-v .s-content { background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.05) 50%); }
+        .t-card .s-content { margin: 100px; background: rgba(255,255,255,0.1); backdrop-filter: blur(20px); border-radius: 60px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); border: 2px solid rgba(255,255,255,0.2); }
+        .t-big-num .s-icon-box { display: none; } .t-big-num .s-title::before { content: "01"; display: block; font-size: 15rem; opacity: 0.2; line-height: 0.8; }
+        .t-neon .s-title { text-shadow: 0 0 40px currentColor; }
+        .t-badge .s-title { background: currentColor; color: #fff !important; padding: 20px 50px; border-radius: 100px; display: inline-block; font-size: 5rem; }
+        .t-social-1 .s-footer { justify-content: center; border: none; font-size: 3rem; }
+        .t-ask .s-title { font-size: 6rem; } .t-ask .s-content { justify-content: center; align-items: center; text-align: center; }
+        .t-reminder .s-content { border-left: 30px solid currentColor; padding-left: 80px; justify-content: center; }
+        .t-gradient .s-bg { opacity: 0.5; } .t-gradient .s-content { align-items: center; justify-content: center; text-align: center; }
+        .t-end .s-content { text-align: center; justify-content: center; } .t-end .s-title { display: none; } .t-end .s-desc { font-size: 4rem; font-weight: 800; }
+
+        /* --- 4. CONTROLS DOCK --- */
+        .controls-dock {
+            height: var(--dock-height);
+            background: #fff;
+            border-radius: 24px 24px 0 0;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.08);
+            display: flex; flex-direction: column; z-index: 100; flex-shrink: 0;
+        }
+
+        .nav-strip { padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .nav-strip button { width: 40px; height: 40px; border-radius: 50%; border: none; background: #f1f5f9; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .nav-strip button:active { transform: scale(0.9); background: #e2e8f0; }
+
+        .panels-area { flex: 1; overflow-y: auto; padding: 20px; }
+        .panel { display: none; animation: fadeIn 0.3s; }
+        .panel.active { display: block; }
+
+        /* Updated UI for Yellow Theme */
+        .icon-btn { aspect-ratio: 1; border: 1px solid var(--border); background: #fff; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
+        /* IMPORTANT: Black text on yellow background */
+        .icon-btn.active { background: var(--accent); color: var(--text-on-accent); border-color: var(--accent-dark); box-shadow: 0 4px 10px rgba(255, 214, 0, 0.4); }
+        
+        .tmpl-item { aspect-ratio: 4/5; border-radius: 8px; border: 2px solid var(--border); background: #f8fafc; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: #64748b; cursor: pointer; position: relative; overflow: hidden; }
+        .tmpl-item.active { border-color: var(--accent); background: #fffbeb; color: #000; font-weight: bold; }
+        .vis-line { width: 60%; height: 2px; background: currentColor; margin: 1px 0; opacity: 0.5; }
+        .vis-box { width: 70%; height: 40%; border: 1px solid currentColor; margin-bottom: 2px; border-radius: 2px; opacity: 0.3; }
+
+        .tab-bar { display: flex; border-top: 1px solid var(--border); background: #fff; padding-bottom: var(--safe-bottom); }
+        .tab-btn { flex: 1; padding: 12px 0; border: none; background: none; color: #94a3b8; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.75rem; font-weight: 500; }
+        .tab-btn.active { color: #b45309; /* Darker yellow/orange for text readability */ }
+        .tab-btn svg { width: 22px; height: 22px; }
+        
+        .inp { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; font-family: inherit; background: #fff; }
+        .inp:focus { outline: 2px solid var(--accent); border-color: transparent; }
+        
+        /* Export Button Style */
+        .btn-export {
+            background: var(--accent-grad);
+            color: var(--text-on-accent); /* Black Text */
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 214, 0, 0.3);
+        }
+        
+        @keyframes fadeIn { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div class="logo">Carooo</div>
+        <button onclick="downloadAll()" class="btn btn-sm rounded-pill px-4 fw-bold btn-export d-flex align-items-center gap-2">
+            تصدير <i data-lucide="download" style="width:16px"></i>
+        </button>
+    </header>
+
+    <div class="workspace" id="ws">
+        <div class="scaler-wrap" id="scaler">
+            <div id="slide" class="slide t-center">
+                <div class="s-bg" id="s-bg"></div>
+                <div class="s-overlay" id="s-overlay"></div>
+                <div class="s-content">
+                    <div class="s-icon-box" id="s-icon"></div>
+                    <div class="s-title" id="s-title">عنوان</div>
+                    <div class="s-desc" id="s-desc">الوصف...</div>
+                    <div class="s-footer">
+                        <span id="s-count">1/1</span>
+                        <span id="s-auth">@User</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-dock">
+        <div class="nav-strip">
+            <button onclick="move(-1)"><i data-lucide="chevron-right"></i></button>
+            <div class="text-center lh-1">
+                <div class="fw-bold" id="nav-idx">1 / 1</div>
+                <small class="text-muted" style="font-size:10px">SLIDE</small>
+            </div>
+            <button onclick="move(1)"><i data-lucide="chevron-left"></i></button>
+            <div style="width:1px; height:20px; background:#eee; margin:0 5px"></div>
+            <button class="text-danger" onclick="delSlide()"><i data-lucide="trash-2"></i></button>
+            <button class="text-primary" onclick="addSlide()" style="color: #b45309 !important"><i data-lucide="plus"></i></button>
+        </div>
+
+        <div class="panels-area">
+            
+            <div id="p-text" class="panel active">
+                <label class="small fw-bold text-muted mb-1">المحتوى</label>
+                <input class="inp" id="i-title" placeholder="العنوان" oninput="upd()">
+                <textarea class="inp" id="i-desc" rows="3" placeholder="الوصف..." oninput="upd()"></textarea>
+                <input class="inp" id="i-auth" placeholder="@Handle" oninput="upd()">
+                
+                <hr class="my-3 opacity-10">
+                <label class="small fw-bold text-muted mb-2 d-flex justify-content-between">
+                    <span>الأيقونة</span>
+                    <span class="text-danger" onclick="setIcon('')" style="cursor:pointer; font-size:0.8rem">إزالة</span>
+                </label>
+                <div class="icon-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;" id="icon-picker"></div>
+            </div>
+
+            <div id="p-style" class="panel">
+                <label class="small fw-bold text-muted mb-2">ألوان البراند</label>
+                <div class="d-flex gap-2 mb-3 overflow-x-auto pb-2">
+                    <div onclick="setCol('#FFD600','#000')" class="rounded-circle border" style="min-width:45px;height:45px;background:#FFD600;cursor:pointer; position:relative;" title="Trendy Yellow">
+                        <div style="position:absolute; bottom:-5px; right:-5px; font-size:10px;">✨</div>
+                    </div>
+                    
+                    <div onclick="setCol('#fff','#1e293b')" class="rounded-circle border" style="min-width:45px;height:45px;background:#fff;cursor:pointer"></div>
+                    <div onclick="setCol('#000000','#FFD600')" class="rounded-circle" style="min-width:45px;height:45px;background:#000;cursor:pointer;border:1px solid #333"></div>
+                    <div onclick="setCol('#1e293b','#f8fafc')" class="rounded-circle" style="min-width:45px;height:45px;background:#1e293b;cursor:pointer"></div>
+                    <div onclick="document.getElementById('upl').click()" class="rounded-circle border d-flex align-items-center justify-content-center" style="min-width:45px;height:45px;background:#f1f5f9;cursor:pointer"><i data-lucide="image" style="width:18px"></i></div>
+                </div>
+                <input type="file" id="upl" hidden accept="image/*" onchange="handleImg(this)">
+                
+                <div class="form-check form-switch p-3 bg-light rounded-3 border">
+                    <input class="form-check-input float-end" type="checkbox" id="sw-over" onchange="upd()">
+                    <label class="form-check-label" for="sw-over">تعتيم الخلفية</label>
+                </div>
+            </div>
+
+            <div id="p-tmpl" class="panel">
+                <div class="tmpl-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;" id="tmpl-container"></div>
+            </div>
+
+        </div>
+
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="tab('text', this)"><i data-lucide="type"></i>نصوص</button>
+            <button class="tab-btn" onclick="tab('style', this)"><i data-lucide="palette"></i>ألوان</button>
+            <button class="tab-btn" onclick="tab('tmpl', this)"><i data-lucide="layout"></i>قوالب</button>
+        </div>
+    </div>
+
+<script>
+    const templates = [
+        { id: 't-center', name: 'وسط' }, { id: 't-left', name: 'يسار' }, { id: 't-right', name: 'يمين' },
+        { id: 't-bold', name: 'عريض' }, { id: 't-minimal', name: 'بسيط' }, { id: 't-frame', name: 'إطار' },
+        { id: 't-quote', name: 'اقتباس' }, { id: 't-top', name: 'علوي' }, { id: 't-bottom', name: 'سفلي' },
+        { id: 't-list', name: 'قائمة' }, { id: 't-split-v', name: 'ظل' }, { id: 't-card', name: 'بطاقة' },
+        { id: 't-big-num', name: 'رقم' }, { id: 't-neon', name: 'نيون' }, { id: 't-badge', name: 'كبسولة' },
+        { id: 't-social-1', name: 'سوشيال' }, { id: 't-ask', name: 'سؤال' }, { id: 't-reminder', name: 'تذكير' },
+        { id: 't-gradient', name: 'تدرج' }, { id: 't-end', name: 'خاتمة' }
+    ];
+    const iconsList = ['star', 'heart', 'zap', 'bookmark', 'share-2', 'sun', 'moon', 'check-circle', 'alert-circle', 'message-circle', 'music', 'camera', 'image', 'map-pin', 'gift'];
+    
+    // Default Slide is Yellow now
+    let slides = [{ title:'عنوان مميز', desc:'ابدأ الكتابة هنا...', footer:'@Carooo', icon:'star', bg:'#FFD600', col:'#000000', tmpl:'t-center', img:null, over:false }];
+    let idx = 0;
+
+    window.onload = () => {
+        setupIcons(); setupTemplates(); autoScale(); render();
+        window.onresize = autoScale;
+    };
+
+    function autoScale() {
+        const ws = document.getElementById('ws');
+        const sc = document.getElementById('scaler');
+        const availH = ws.clientHeight - 40; 
+        const availW = ws.clientWidth - 40;
+        const scale = Math.min(availW / 1080, availH / 1350);
+        sc.style.transform = `scale(${scale})`;
+        sc.style.width = '1080px'; sc.style.height = '1350px';
+    }
+
+    function render() {
+        const s = slides[idx];
+        const el = document.getElementById('slide');
+        el.className = `slide ${s.tmpl}`;
+        document.getElementById('s-title').innerText = s.title;
+        document.getElementById('s-desc').innerText = s.desc;
+        document.getElementById('s-auth').innerText = s.footer;
+        const iconBox = document.getElementById('s-icon');
+        iconBox.innerHTML = s.icon ? `<i data-lucide="${s.icon}"></i>` : '';
+        iconBox.style.display = s.icon ? 'block' : 'none';
+        el.style.backgroundColor = s.bg;
+        el.style.color = s.col;
+        const bgDiv = document.getElementById('s-bg');
+        bgDiv.style.backgroundImage = s.img ? `url(${s.img})` : 'none';
+        document.getElementById('s-overlay').style.display = s.over ? 'block' : 'none';
+        
+        // Sync Inputs
+        document.getElementById('i-title').value = s.title;
+        document.getElementById('i-desc').value = s.desc;
+        document.getElementById('i-auth').value = s.footer;
+        document.getElementById('sw-over').checked = s.over;
+        document.getElementById('nav-idx').innerText = `${idx+1} / ${slides.length}`;
+
+        // UI Highlights
+        document.querySelectorAll('.tmpl-item').forEach(t => t.classList.remove('active'));
+        const activeTmpl = document.getElementById(`btn-${s.tmpl}`);
+        if(activeTmpl) activeTmpl.classList.add('active');
+        document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('active'));
+        const activeIcon = document.getElementById(`btn-icon-${s.icon}`);
+        if(activeIcon) activeIcon.classList.add('active');
+        lucide.createIcons();
+    }
+
+    function setupIcons() {
+        const grid = document.getElementById('icon-picker');
+        iconsList.forEach(ic => {
+            const btn = document.createElement('div');
+            btn.className = 'icon-btn'; btn.id = `btn-icon-${ic}`;
+            btn.innerHTML = `<i data-lucide="${ic}"></i>`;
+            btn.onclick = () => { slides[idx].icon = ic; render(); };
+            grid.appendChild(btn);
+        });
+    }
+
+    function setupTemplates() {
+        const grid = document.getElementById('tmpl-container');
+        templates.forEach(t => {
+            const div = document.createElement('div');
+            div.className = 'tmpl-item'; div.id = `btn-${t.id}`;
+            div.onclick = () => { slides[idx].tmpl = t.id; render(); };
+            div.innerHTML = `<div class="vis-box"></div><div class="vis-line"></div><div class="vis-line" style="width:40%"></div><span style="margin-top:4px">${t.name}</span>`;
+            grid.appendChild(div);
+        });
+    }
+
+    function upd() {
+        const s = slides[idx];
+        s.title = document.getElementById('i-title').value;
+        s.desc = document.getElementById('i-desc').value;
+        s.footer = document.getElementById('i-auth').value;
+        s.over = document.getElementById('sw-over').checked;
+        render();
+    }
+    function setCol(bg, col) { slides[idx].bg=bg; slides[idx].col=col; slides[idx].img=null; render(); }
+    function handleImg(inp) {
+        if(inp.files[0]){
+            const r = new FileReader();
+            r.onload = e => { slides[idx].img=e.target.result; slides[idx].col='#fff'; slides[idx].over=true; render(); }
+            r.readAsDataURL(inp.files[0]);
+        }
+    }
+    function move(d) { if(idx+d >= 0 && idx+d < slides.length) { idx+=d; render(); } }
+    function addSlide() { slides.splice(idx+1,0,{...slides[idx], title:'جديد'}); idx++; render(); }
+    function delSlide() { if(slides.length>1) { slides.splice(idx,1); if(idx>=slides.length) idx--; render(); } }
+    function tab(p, btn) {
+        document.querySelectorAll('.panel').forEach(e=>e.classList.remove('active'));
+        document.getElementById(`p-${p}`).classList.add('active');
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+    async function downloadAll() {
+        const zip = new JSZip();
+        const sc = document.getElementById('scaler');
+        const oldT = sc.style.transform;
+        sc.style.transform = 'none';
+        try {
+            for(let i=0; i<slides.length; i++){
+                idx=i; render(); await new Promise(r=>setTimeout(r,100));
+                const c = await html2canvas(document.getElementById('slide'), {scale:1, useCORS:true});
+                const b = await new Promise(r=>c.toBlob(r));
+                zip.file(`carooo-${i+1}.png`, b);
+            }
+            saveAs(await zip.generateAsync({type:"blob"}), "carooo-yellow.zip");
+        } finally { autoScale(); }
+    }
+</script>
+</body>
+</html>
