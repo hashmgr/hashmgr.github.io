@@ -4,7 +4,6 @@ Full Stack Engineer (6+ years)
 
 I work mostly on backend systems, APIs, and production apps that need to stay stable under real usage.
 
----
 
 ## What I usually work on
 
